@@ -1,0 +1,13 @@
+<template>
+    <h2> {datatableHeading}</h2>
+
+        <lightning-datatable 
+            data={accRecord} 
+            columns={accColumns} 
+            sorted-by={sortBy}
+            sorted-direction={sortDirection}
+            onsort={doSorting}
+            key-field="Id">
+        </lightning-datatable>
+
+</template>
