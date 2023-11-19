@@ -1,0 +1,37 @@
+<template>
+    <lightning-card >
+        <div class="slds-m-around_medium" >            
+            <b>
+                {accounttablelable}
+            </b>           
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+                label="Account Type "
+                name="Account Type "
+                value={selectedAccountType}
+                options={accountTypeOptions}
+                onchange={handleAccountTypeChange}
+            ></lightning-combobox>
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+                label="Select Account"
+                name="selectedAccount"
+                value={selectedAccountId}
+                options={accountOptions}
+                onchange={handleAccountChange}
+            ></lightning-combobox>
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+                label="Related Contacts"
+                name="relatedContacts"
+                value={selectedContactId}
+                options={contactOptions}
+            ></lightning-combobox>
+        </div>
+
+    </lightning-card>
+
+</template>
