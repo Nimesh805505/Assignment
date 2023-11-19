@@ -1,0 +1,66 @@
+<template>
+    <lightning-button 
+        variant="brand" 
+        disabled ={removeButtonDisable}
+        label="Remove File" 
+        title="Remove File" 
+        onclick={handleRemovePopup} 
+        class="slds-m-left_x-small">
+    </lightning-button>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" 
+            tabindex="-1"
+            aria-labelledby="modal-heading-01" 
+            aria-modal="true"
+            aria-describedby="modal-content-id-1" 
+            class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                            <div class="slds-float_left">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                                <b>
+                                {popupHeading}
+                                </b>
+                                </h2>
+                            </div>
+                            <div class="slds-float_right">
+                                <button 
+                                class="slds-button slds-button_icon slds-button_icon-small" 
+                                onclick={closeModal}>
+                                    <lightning-icon 
+                                    icon-name="utility:close" 
+                                    alternative-text="Close" 
+                                    size="x-small">
+                                    </lightning-icon>
+                                </button>
+                            </div>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                        <div class="slds-modal__content">
+                            <ul>
+                                <template for:each={uploadedFiles} for:item="file">
+                                    <li key={file.Id} class="slds-clearfix slds-m-bottom_medium">
+                                        {file.ContentDocument.Title} 
+                                        <lightning-button label="Remove"
+                                                        class="slds-float_right"
+                                                        onclick={handleRemoveFile}
+                                                        data-file-id={file.Id}
+                                                        variant="destructive">
+                                        </lightning-button>
+                                    </li>                                   
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">Remove file Done</button>
+                    </footer>
+                </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
