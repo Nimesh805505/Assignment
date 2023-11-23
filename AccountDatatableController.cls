@@ -1,9 +1,12 @@
 public with sharing class AccountDatatableController {
+    
     @AuraEnabled(cacheable = true)
     public static List<AccountWrapper>  getAccountRecord() {
         List<AccountWrapper> accountData = new List<AccountWrapper>();
         try {
-            List<Account> accountsWithContacts = [SELECT Id, Name, Type, AnnualRevenue, Phone, (SELECT Id FROM Contacts) FROM Account LIMIT 10];
+            List<Account> accountsWithContacts = [SELECT Id, Name, Type, AnnualRevenue, Phone, (SELECT Id FROM Contacts) 
+                                                  FROM Account  WITH SECURITY_ENFORCED
+                                                  LIMIT 10];
             for (Account acc : accountsWithContacts) {
                 accountData.add(new AccountWrapper(acc, acc.Contacts.size()));
             }
