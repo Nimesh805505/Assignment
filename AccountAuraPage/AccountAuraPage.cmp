@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+<aura:component Controller="AccountContactController"  implements="flexipage:availableForRecordHome,force:hasRecordId">
     <aura:attribute name="accountId" type="String" />
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 

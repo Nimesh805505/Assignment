@@ -1,7 +1,6 @@
 import { LightningElement, wire,track } from 'lwc';
 import SAMPLEMC from "@salesforce/messageChannel/SampleMessageChannel__c"
 import {subscribe, MessageContext,APPLICATION_SCOPE } from 'lightning/messageService';
-import getContactsForAccount from '@salesforce/apex/AccountContactController.getContactsForAccount';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 const columns = [
     { label: 'Name', fieldName: 'Name', sortable: true},
@@ -10,7 +9,6 @@ const columns = [
 ];
  
 export default class DisplayContactFromAura extends LightningElement {
-    receivedAccountId ;
     subscription;
     contactsRecord;
     columns = columns;
@@ -31,27 +29,10 @@ export default class DisplayContactFromAura extends LightningElement {
     }
 
     handleMessage(message){
-        this.receivedAccountId = message.lmsData.value;
+      this.contactsRecord = message;
         if(message!=null){
             this.dataLoad = true;
         }
-        this.loadContacts();
-    }
-
-    loadContacts() {
-        getContactsForAccount({ accountId: this.receivedAccountId })
-        .then((result) => {
-            this.contactsRecord = result.map(record=> {
-                return {
-                Name: record.Name,
-                Email: record.Email,
-                Phone: record.Phone,
-                };
-            });
-        })   
-        .catch((error) => {
-            this.showErrorToast(error);
-        });
     }
     doSorting(event) {
         this.sortBy = event.detail.fieldName;
