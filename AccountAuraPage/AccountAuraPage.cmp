@@ -1,0 +1,16 @@
+<aura:component Controller="AccountContactController"  implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="accountId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:messageChannel type="SampleMessageChannel__c" aura:id="SampleMessageChannel" scope="APPLICATION" />
+
+    <lightning:card title="Aura Component">
+
+        <div class="slds-p-around_medium">
+            <lightning:button label="Get Related Contacts" onclick="{!c.sendAccountID}" />
+
+        </div>
+
+    </lightning:card>
+
+</aura:component>

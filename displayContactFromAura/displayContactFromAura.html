@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="LWC Component- Account Contacts">
+    <template if:true={dataLoad}>
+                <lightning-datatable 
+                    data={contactsRecord} 
+                    hide-checkbox-column
+                    columns={columns}
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection}
+                    onsort={doSorting} 
+                    key-field="Id">
+                 </lightning-datatable>
+    </template>
+       
+    </lightning-card>
+</template>
